@@ -115,7 +115,7 @@ function App() {
         <UI.Link
           variant="h1"
           component={Link}
-          to="/act-now"
+          to="/action-now"
           sx={{
             backgroundColor: "#fff",
             color: "#000",
@@ -134,7 +134,7 @@ function App() {
           International Law!
         </UI.Typography>
       </UI.AppBar>
-      {location.pathname === "/act-now" ? (
+      {["/act-now", "/action-now"].includes(location.pathname) ? (
         <ActNow />
       ) : (
         <>
@@ -172,6 +172,7 @@ function App() {
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/act-now" Component={ActNow} />
+            <Route path="/action-now" Component={ActNow} />
             <Route path="*" Component={PanelContainer} />
           </Routes>
           <UI.Box sx={{ mb: 3 }}>
