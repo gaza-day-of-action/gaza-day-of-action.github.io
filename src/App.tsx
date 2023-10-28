@@ -1,9 +1,10 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import { JoinUs } from "./pages/JoinUs";
 import { Home } from "./pages/Home";
 import * as UI from "@mui/material";
 import header from "./header.jpg";
 import { OurDemands } from "./pages/OurDemands";
+import { ActNow } from "./pages/ActNow";
 import { HowToPlanALocalAction } from "./pages/HowToPlanALocalAction";
 import { HowToTakePartInThePhoneBlockade } from "./pages/HowToTakePartInThePhoneBlockade";
 import { FlyersToDownload } from "./pages/FlyersToDownload";
@@ -88,6 +89,7 @@ const PanelContainer = () => {
 };
 
 function App() {
+  const location = useLocation();
   return (
     <UI.Box sx={{ flexGrow: 1 }}>
       <UI.AppBar
@@ -110,59 +112,83 @@ function App() {
         <UI.Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
           GAZA DAY OF ACTION
         </UI.Typography>
+        <UI.Link
+          variant="h1"
+          component={Link}
+          to="/act-now"
+          sx={{
+            backgroundColor: "#fff",
+            color: "#000",
+            py: 2,
+            my: 2,
+            display: "flex",
+            alignItems: "middle",
+            justifyContent: "center",
+          }}
+        >
+          ACT NOW
+        </UI.Link>
+
         <UI.Typography variant="h6" sx={{ fontWeight: "bold", m: 2 }}>
           Stop UK Government Complicity in Genocide - Demand Your MP Uphold
           International Law!
         </UI.Typography>
       </UI.AppBar>
-      <UI.Box
-        sx={{
-          maxWidth: "400px",
-          margin: "auto",
-          textAlign: "center",
-        }}
-      >
-        <UI.Typography
-          variant="h6"
-          sx={{
-            fontWeight: "bold",
-            mb: 2,
-            color: "#fff",
-            textTransform: "uppercase",
-          }}
-        >
-          UK politicians are enabling Israel to commit genocide and breach
-          international law with impunity. The Labour Party leadership has given
-          the green light.
-        </UI.Typography>
-        <UI.Typography
-          variant="h6"
-          sx={{
-            fontWeight: "bold",
-            color: "#fff",
-            textTransform: "uppercase",
-          }}
-        >
-          Join us in saying <u>shame on you!</u>
-        </UI.Typography>
-      </UI.Box>
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="*" Component={PanelContainer} />
-      </Routes>
-      <UI.Box sx={{ mb: 3 }}>
-        <UI.Link
-          href="mailto:londonpalestineaction@gmail.com"
-          sx={{
-            color: "#fff",
-            display: "flex",
-            justifyContent: "center",
-            textDecorationColor: "#fff",
-          }}
-        >
-          <Email sx={{ mr: 1 }} /> londonpalestineaction@gmail.com
-        </UI.Link>
-      </UI.Box>
+      {location.pathname === "/act-now" ? (
+        <ActNow />
+      ) : (
+        <>
+          <UI.Box
+            sx={{
+              maxWidth: "400px",
+              margin: "auto",
+              textAlign: "center",
+            }}
+          >
+            <UI.Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                mb: 2,
+                color: "#fff",
+                textTransform: "uppercase",
+              }}
+            >
+              UK politicians are enabling Israel to commit genocide and breach
+              international law with impunity. The Labour Party leadership has
+              given the green light.
+            </UI.Typography>
+            <UI.Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                color: "#fff",
+                textTransform: "uppercase",
+              }}
+            >
+              Join us in saying <u>shame on you!</u>
+            </UI.Typography>
+          </UI.Box>
+          <Routes>
+            <Route path="/" Component={Home} />
+            <Route path="/act-now" Component={ActNow} />
+            <Route path="*" Component={PanelContainer} />
+          </Routes>
+          <UI.Box sx={{ mb: 3 }}>
+            <UI.Link
+              href="mailto:londonpalestineaction@gmail.com"
+              sx={{
+                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                textDecorationColor: "#fff",
+              }}
+            >
+              <Email sx={{ mr: 1 }} /> londonpalestineaction@gmail.com
+            </UI.Link>
+          </UI.Box>
+        </>
+      )}
     </UI.Box>
   );
 }
